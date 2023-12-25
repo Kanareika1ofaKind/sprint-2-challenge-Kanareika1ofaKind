@@ -5,33 +5,94 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
-
+    function profileActivation(profile, reason = undefined) {
+     if(profile.active == false) {
+     return {active: true} 
+    } 
+    else if (profile.active == true && reason !== undefined){
+      return { active: false, reason: reason} 
+    } 
+    else {
+      return "confirm status manually"
+    }
+     
     }
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
-
+    
+     if(x < 1 || x > 3 || y < 1 || y > 3) {
+      return "invalid coordinates"   // place those restrictions 1st to prevent outreaching numbers
+     } 
+     let bx = grid[y-1][x-1]
+     if(bx == "🟥"){
+      return "🟥 💀"
+     }
+     else if(bx == "🟦"){
+      return "🟦 🥳"
+     }
     }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
+      for (let x of Object.keys(obj)) {
+        if (x.length > 9) {
+          return "shorten all prop names to 9 chars or less"
+        } 
+      return Object.entries(obj).
+         filter(([key, val]) => val !== null).
+         reduce((cur, [key, val]) => { return Object.assign(cur, { [key]: val == 0 ? false : val == 1 ? true : val }) }, {});
 
+      }
     }
 
     // 👉 CHALLENGE 4
+    
     function scrub(text, forbidden) {
 
-    }
+
+        forbidden.forEach(word => {
+          if (text.toLowerCase().includes(word)) {
+            let regEx = new RegExp(word, "ig");
+            text = text.replace(regEx, 'x'.repeat(word.length));
+          }
+        })
+        return text
+      }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
-    function normalizePhoneNumber(num) {
+    // function normalizePhoneNumber(num) {
 
-    }
+    // }
+    function normalizePhoneNumber(numbers) {
+        let format = "(xxx) xxx-xxxx";
+
+        for (let i = 0; i < numbers.length; i++) {
+          format = format.replace('x', numbers[i]);
+        }
+
+        return format;
+      }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
+     let diceRolled = 0
+      let if6Rolled = 0
+      let number = 0
 
+      while (if6Rolled < 3) {
+
+        number = Math.floor(Math.random() * (6 - 1 + 1) + 1)
+
+        diceRolled++
+
+        if (number == 6) {
+          if6Rolled++
+        }
+
+      }
+
+      return diceRolled
     }
 
     // 🧪 DO NOT make any changes below this line ===================
